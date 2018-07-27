@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="card">
+        {# <img src="paris.jpg" class="mx-auto d-block" style="width:50%"> #}
+        <h5 class="card-header text-center text-white bg-primary">{{note.title}}</h5>
+        <div class="card-body">
+            {% if note.img %}
+                <img class="mx-auto d-block" style="width:40%;margin:5px;" src="{{note.img.url}}" alt="">
+            {% endif %}
+            <p class="card-title" style="color:#828a91;">author : {{note.user}} &nbsp;&nbsp;-&nbsp;&nbsp; at : {{note.created}}</p>
+            <h5 class="card-text text-justify" style="text-indent: 20px;">{{note.content|safe}}</h5>
+            <br><br>
+            <p>tags : {{note.tags}}</p>
+            <hr>
+            {% if note.user.username == user.username %}
+                <a href="{% url 'notes:note_edit' note.slug %}" class="btn btn-outline-primary">Edit</a>
+                <a href="{% url 'notes:note_delete' note.slug %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+            <a href="/" class="btn btn-primary" style="float: right;">Go Back</a>
+        </div>
+    </div>
+
+
+{% endblock %}

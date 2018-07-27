@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {{ form.media }}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Add Note</button>
+            <a href="{% url 'notes:all_notes' %}" class="btn btn-primary">Cancel</a>
+        {% endbuttons %}
+    </form>
+
+{% endblock %}

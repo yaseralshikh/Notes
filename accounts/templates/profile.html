@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="card text-center" style="width:23rem;margin:0 auto;">
+    {% if profile.img %}
+        <img class="card-img-top" src="{{profile.img.url}}"  style="width: 50%;margin: 0 auto;margin-top:30px;" alt="image profile">
+    {% else %}
+        <img class="card-img-top" src="{% static 'home-static/img/avatar-profile.png' %}"  style="width: 50%;margin: 0 auto;margin-top:30px;" alt="image profile">
+    {% endif %}
+      <div class="card-body">
+        <h5 class="card-title text-danger">{{profile.user}}</h5>
+        <p class="card-text">Bio : {{profile.bio}}.</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Head Line : {{profile.headline}}</li>
+        <li class="list-group-item">Join Data : {{profile.join_data}}</li>
+      </ul>
+      {% if profile.slug == user.username %}
+          <div class="card-body bg-light">
+            <a href="{% url 'accounts:edit_profile' profile.slug %}" class="btn btn-primary">Edit Profile</a>
+            <a href="{% url 'accounts:change_password' profile.slug %}" class="btn btn-primary">Change Password</a>
+          </div>
+      {% endif %}
+</div>
+
+{% endblock %}
